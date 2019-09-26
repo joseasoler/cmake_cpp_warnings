@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+# CLion project files and build folders
+.idea
+cmake-build*
+
+# Microsoft Visual C++ project files and folders
+.vs
+out*
