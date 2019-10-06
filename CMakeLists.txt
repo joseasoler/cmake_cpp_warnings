@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Disable non-standard extensions by default.
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-include(cmake/cpp_warnings.cmake) # Provides the target_enable_warnings function.
+include(cmake/cpp_warnings.cmake)
 
 add_executable(CMakeCppWarnings src/main.cpp)
-target_enable_warnings(CMakeCppWarnings)
+target_compile_options(CMakeCppWarnings PRIVATE ${PROJECT_WARNING_FLAGS})
