@@ -7,7 +7,7 @@ include_guard(GLOBAL)
 
 option(WARNINGS_AS_ERRORS "Targets using PROJECT_WARNING_FLAGS will treat warnings as errors." OFF)
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   option(CLANG_ENABLE_ALL_WARNINGS "PROJECT_WARNING_FLAGS will add all warnings (except C++98 compatibility ones) when using Clang" OFF)
 endif ()
 
@@ -28,7 +28,7 @@ if (CLANG_ENABLE_ALL_WARNINGS)
     -Wno-c++98-compat                  # This project is not compatible with C++98.
     -Wno-c++98-compat-pedantic         # This project is not compatible with C++98.
     )
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   # Warnings present on all supported versions of GCC and Clang.
   list(APPEND PROJECT_WARNING_FLAGS
     -Wall                # Enables most warnings.
@@ -101,7 +101,7 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "
         -Wredundant-tags            # Redundant class-key and enum-key where it can be eliminated.
         )
     endif ()
-  elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+  elseif (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     list(APPEND PROJECT_WARNING_FLAGS
       -Wdouble-promotion            # Warn about implicit conversions from "float" to "double".
       -Wnull-dereference            # Dereferencing a pointer may lead to erroneous or undefined behavior.
@@ -137,7 +137,7 @@ endif ()
 
 # Enable warnings as errors.
 if (WARNINGS_AS_ERRORS)
-  if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+  if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     list(APPEND PROJECT_WARNING_FLAGS -Werror)
   elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     list(APPEND PROJECT_WARNING_FLAGS /WX)
